@@ -32,7 +32,6 @@ export class CollegeProjectCloudKitStack extends cdk.Stack {
             commands: [
               'docker volume create --name=postgres-volume',
               'docker-compose up -d postgres',
-              'docker build . -t back-end',
               'docker-compose up create-db',
               'docker-compose up test',
             ],
