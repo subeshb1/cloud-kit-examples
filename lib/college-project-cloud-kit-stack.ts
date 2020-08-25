@@ -16,6 +16,11 @@ export class CollegeProjectCloudKitStack extends cdk.Stack {
 
     new codebuild.Project(this, 'MyProject', {
       source: gitHubSource,
+      environment: {
+        buildImage: codebuild.LinuxBuildImage.AMAZON_LINUX_2_3,
+        privileged: true
+
+      },
       buildSpec: codebuild.BuildSpec.fromObject({
         version: '0.2',
         phases: {
