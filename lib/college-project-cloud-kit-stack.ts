@@ -21,7 +21,9 @@ export class CollegeProjectCloudKitStack extends cdk.Stack {
         phases: {
           build: {
             commands: [
-              'echo "Hello, CodeBuild!"',
+              'docker-compose up -d postgres',
+              'docker-compose up create-db',
+              'docker-compose up test',
             ],
           },
         },
