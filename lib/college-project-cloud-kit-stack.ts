@@ -18,14 +18,20 @@ export class CollegeProjectCloudKitStack extends cdk.Stack {
       source: gitHubSource,
       environment: {
         buildImage: codebuild.LinuxBuildImage.AMAZON_LINUX_2_3,
-        privileged: true
-
+        privileged: true,
+        environmentVariables: {
+          "ENV_TYPE":  {
+            value: "test",
+          }
+        }
       },
       buildSpec: codebuild.BuildSpec.fromObject({
         version: '0.2',
         phases: {
           build: {
             commands: [
+              'docker build . -t back-end',
+              'docker volume create --name=postgres-volume',
               'docker-compose up -d postgres',
               'docker-compose up create-db',
               'docker-compose up test',
